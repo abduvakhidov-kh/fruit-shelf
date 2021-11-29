@@ -1,25 +1,22 @@
 import React from 'react'
 import FruitBoxStyled from './FruitBox.styled'
-import Fruit from "../Fruit/Fruit.comp";
-import {IFruit} from '../../App';
+import { FruitKindProvider, FruitSizeProvider } from "../fruitContext";
 
 interface IFruitBoxProps{
     defaultKind: string;
-    defaultSize?: number;
+    defaultSize: number;
     children: React.ReactNode;
-    fruits: IFruit[];
 }
 
-export default function FruitBox({defaultKind, defaultSize, children, fruits}: IFruitBoxProps){
+export default class FruitBox extends React.Component<IFruitBoxProps>{
 
-
-    return(
-      <FruitBoxStyled>
-           {/*{fruits.map(({kind,size}) => (*/}
-          {/*        <Fruit kind={kind} size={size}/>*/}
-          {/*    )*/}
-          {/*)}*/}
-          {children}
-      </FruitBoxStyled>
-    );
-} 
+    render() {
+        return <FruitBoxStyled>
+            <FruitSizeProvider value={this.props.defaultSize}>
+                <FruitKindProvider value={this.props.defaultKind}>
+                    {this.props.children}
+                </FruitKindProvider>
+            </FruitSizeProvider>
+        </FruitBoxStyled>
+    }
+}

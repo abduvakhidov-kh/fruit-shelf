@@ -1,22 +1,40 @@
 import React from "react";
-import lemon from "../../assets/img/lemon.png";
 import FruitStyled from "./Fruit.styled";
+import { FruitKindConsumer, FruitSizeConsumer } from "../fruitContext";
 
 interface IFruitProps {
-  kind?: string;
+  kind?: string | null;
   size?: number;
 }
 
 const defaultProps: IFruitProps = {
-  kind: lemon,
-  size: 2,
+  kind: null,
+  size: 1,
 };
 
 export default function Fruit({ kind, size }: IFruitProps) {
   return (
-    <FruitStyled size={size}>
-      <img src={kind} alt="" />
-    </FruitStyled>
+    <div>
+      {kind != null ? (
+        <FruitStyled size={size}>
+          <img src={kind} alt="" />
+        </FruitStyled>
+      ) : (
+        <FruitSizeConsumer>
+          {(fruitBoxSize) => {
+            return (
+              <FruitStyled size={fruitBoxSize}>
+                <FruitKindConsumer>
+                  {(fruitBoxKind) => {
+                    return <img src={fruitBoxKind} alt="" />;
+                  }}
+                </FruitKindConsumer>
+              </FruitStyled>
+            );
+          }}
+        </FruitSizeConsumer>
+      )}
+    </div>
   );
 }
 
