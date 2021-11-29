@@ -15,10 +15,11 @@ export default function FruitBox({defaultKind, defaultSize, children, fruits}: I
 
     return(
       <FruitBoxStyled>
-          {fruits.map(({kind,size}) => (
-                <Fruit kind={kind} size={size}/>
-              )
-          )}
+           {/*{fruits.map(({kind,size}) => (*/}
+          {/*        <Fruit kind={kind} size={size}/>*/}
+          {/*    )*/}
+          {/*)}*/}
+          {children}
       </FruitBoxStyled>
     );
 } 

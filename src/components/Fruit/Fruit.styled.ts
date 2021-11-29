@@ -4,7 +4,8 @@ interface IFruitProps {
 }
 
 export default styled.div<IFruitProps>`
-  img {
-    width: ${(props) => props.size}00px;
-  }
-`;
+    margin: 5px;
+    img{
+        width: ${props => (props.size)}0px;
+    }
+`
